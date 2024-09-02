@@ -2,11 +2,15 @@
 
 set -eux
 
-S="$1"
+if [ $# -gt 0 ]; then
+	S="--switch=$1"
+else
+	S=""
+fi
 
-VARS=$(opam env $S | cut -d= -f1)
+VARS=$(opam env --set-switch $S | cut -d= -f1)
 
-eval $(opam env $S)
+eval $(opam env --set-switch $S)
 
 for v in $VARS; do
 	echo "$v='${!v}'"
