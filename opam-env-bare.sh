@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eux
+
 S="$1"
 
 VARS=$(opam env $S | cut -d= -f1)
