@@ -22,3 +22,14 @@ runs:
     - name: Run script and append to env
       shell: bash
       run: opam-env-bare.sh ${{ inputs.switch }} >>'${{ inputs.output }}'
+
+    - name: Hack for PATH?
+      shell: bash
+      run: |
+        eval $(PATH= $(which opam) env)
+        echo $PATH >> $GITHUB_PATH
+
+    - name: test random var
+      shell: bash
+      run: |
+        echo "GGGXY=123" >>$GITHUB_ENV
