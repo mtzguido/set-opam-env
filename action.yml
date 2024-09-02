@@ -23,10 +23,10 @@ runs:
       run: echo $GITHUB_ENV
     - name: My env file is 2
       shell: bash
-      run: echo {{env.GITHUB_ENV}}
+      run: echo ${{env.GITHUB_ENV}}
     - name: My outfile is
       shell: bash
-      run: echo {{inputs.output}}
+      run: echo ${{inputs.output}}
 
     - name: before
       shell: bash
