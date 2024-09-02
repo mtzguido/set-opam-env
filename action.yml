@@ -1,10 +1,6 @@
 name: 'Set OPAM environment variables'
 description: 'Runs "opam env" and extends the environment for subsequent steps (via $GITHUB_ENV)'
 inputs:
-  output:
-    description: 'The file where to append the output, usually $GITHUB_ENV'
-    required: true
-    default: .opam.env
   switch:
     description: 'Name of desired OPAM switch, leave blank for default'
     required: false
@@ -19,17 +15,15 @@ runs:
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
-    - name: Run script and append to env
+    - name: Run script and extend env
       shell: bash
-      run: opam-env-bare.sh ${{ inputs.switch }} >>'${{ inputs.output }}'
+      run: opam-env-bare.sh ${{ inputs.switch }} >>$GITHUB_ENV
 
-    - name: Hack for PATH?
+    # Setting PATH in GITHUB_ENV has no effect. 
+    # This step pulls the PATH component and appends
+    # it $GITHUB_PATH.
+    - name: Hack for PATH
       shell: bash
       run: |
-        eval $(PATH= $(which opam) env)
-        echo $PATH >> $GITHUB_PATH
-
-    - name: test random var
-      shell: bash
-      run: |
-        echo "GGGXY=123" >>$GITHUB_ENV
+        eval $(PATH= $(which opam) env ${{ inputs.switch }})
+        echo $PATH >>$GITHUB_PATH
