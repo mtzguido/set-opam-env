@@ -4,6 +4,7 @@ inputs:
   output:
     description: 'The file where to append the output, usually $GITHUB_ENV'
     required: true
+    default: .opam.env
   switch:
     description: 'Name of desired OPAM switch, leave blank for default'
     required: false
@@ -18,24 +19,6 @@ runs:
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
-    - name: My env file is
-      shell: bash
-      run: echo $GITHUB_ENV
-    - name: My env file is 2
-      shell: bash
-      run: echo ${{env.GITHUB_ENV}}
-    - name: My outfile is
-      shell: bash
-      run: echo ${{inputs.output}}
-
-    - name: before
-      shell: bash
-      run: cat ${{inputs.output}}
-        
     - name: Run script and append to env
       shell: bash
-      run: opam-env-bare.sh '${{ inputs.output }}' ${{ inputs.switch }}
-
-    - name: after
-      shell: bash
-      run: cat ${{inputs.output}}
+      run: opam-env-bare.sh ${{ inputs.switch }} >>'${{ inputs.output }}'
