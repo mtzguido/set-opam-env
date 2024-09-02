@@ -13,5 +13,5 @@ VARS=$(opam env --set-switch $S | cut -d= -f1)
 eval $(opam env --set-switch $S)
 
 for v in $VARS; do
-	echo "$v='${!v}'"
+	echo "$v=${!v}"
 done
