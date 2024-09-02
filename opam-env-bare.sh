@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -eu
 
 if [ $# -gt 0 ]; then
 	S="--switch=$1"
