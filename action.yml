@@ -1,6 +1,9 @@
 name: 'Set OPAM environment variables'
 description: 'Runs "opam env" and extends the environment for subsequent steps (via $GITHUB_ENV)'
 inputs:
+  output:
+    description: 'The file where to append the output, usually $GITHUB_ENV'
+    required: true
   switch:
     description: 'Name of desired OPAM switch, leave blank for default'
     required: false

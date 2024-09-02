@@ -2,6 +2,9 @@
 
 set -eu
 
+OFILE="$1"
+shift
+
 if [ $# -gt 0 ]; then
 	S="--switch=$1"
 else
@@ -14,4 +17,4 @@ eval $(opam env --set-switch $S)
 
 for v in $VARS; do
 	echo "$v='${!v}'"
-done
+done >> "${OFILE}"
