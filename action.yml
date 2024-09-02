@@ -18,6 +18,16 @@ runs:
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
+    - name: My env file is
+      shell: bash
+      run: echo $GITHUB_ENV
+    - name: My env file is 2
+      shell: bash
+      run: echo {{env.GITHUB_ENV}}
+    - name: My outfile is
+      shell: bash
+      run: echo {{inputs.output}}
+
     - name: before
       shell: bash
       run: cat ${{inputs.output}}
