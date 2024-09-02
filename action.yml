@@ -20,4 +20,4 @@ runs:
 
     - name: Run script and append to env
       shell: bash
-      run: opam-env-bare.sh ${{ inputs.switch }} >>$GITHUB_ENV
+      run: opam-env-bare.sh '${{ inputs.output }}' ${{ inputs.switch }} >>$GITHUB_ENV
