@@ -11,4 +11,4 @@ runs:
   steps:
     - name: Run script and append to env
       shell: bash
-      run: opam-env-bare.sh ${{ inputs.switch }} >>$GITHUB_ENV
+      run: ${{ github.action_path }}/opam-env-bare.sh ${{ inputs.switch }} >>$GITHUB_ENV
